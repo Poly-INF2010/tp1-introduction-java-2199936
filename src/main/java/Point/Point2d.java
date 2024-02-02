@@ -10,7 +10,7 @@ public class Point2d extends AbstractPoint {
      * @param y Y coordinate
      */
     public Point2d(Double x, Double y) {
-        super(new double[] {x, y});
+        super(new double[] {X, Y});
     }
 
     /** TODO
