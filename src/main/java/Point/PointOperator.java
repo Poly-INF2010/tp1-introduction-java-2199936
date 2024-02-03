@@ -23,6 +23,7 @@ public final class PointOperator {
      */
     public static void rotate(Double[] vector, Double[][] rotationMatrix) {
 
+
     }
 
     /** TODO
