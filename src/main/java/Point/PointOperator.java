@@ -11,6 +11,7 @@ public final class PointOperator {
      * @param translateVector Translation to apply
      */
     public static void translate(Double[] vector, Double[] translateVector) {
+        Arrays.setAll(vector, i -> vector[i] + translateVector[i]);
 
     }
 
