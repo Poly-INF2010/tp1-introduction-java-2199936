@@ -19,29 +19,24 @@ public final class LetterFactory {
     public static BaseShape create_A()  {
         BaseShape letterA = new BaseShape();
 
-        // Créer les deux rectangles identiques
-        Rectangle leftRectangle = new Rectangle(stripeThickness, maxHeight);
-        Rectangle rightRectangle = new Rectangle(stripeThickness, maxHeight);
+        Rectangle rectangleAngulaire1 = new Rectangle(stripeThickness,maxHeight);
+        Rectangle rectangleAngulaire2 = new Rectangle(stripeThickness,maxHeight);
+        Rectangle rectangleHorizontal = new Rectangle(stripeThickness,halfMaxHeight);
 
-        // Faire pivoter un rectangle de 30 degrés
-        leftRectangle.rotate(leftRectangle.getCoords(), 30.0);
+        rectangleAngulaire1.rotate(rectangleAngulaire1.getCoords(),0.3490658504);
+        rectangleAngulaire2.rotate(rectangleAngulaire2.getCoords(),-0.3490658504 );
+        rectangleHorizontal.rotate(rectangleHorizontal.getCoords(),(3.1415926536/2));
 
-        // Faire pivoter l'autre rectangle de 120 degrés
-        rightRectangle.rotate(rightRectangle.getCoords(), 120.0);
+        Point2d rectangle1Position = new Point2d(rectangleHorizontal.getMinX(), 50.0);
+        Point2d rectangle2Position = new Point2d(rectangleHorizontal.getMaxX(), 50.0);
+        Point2d rectangleHorizontalPosition = new Point2d(0.0, 40.0);
+        rectangleAngulaire1.translate(rectangleAngulaire1.getCoords(),rectangle1Position );
+        rectangleAngulaire2.translate(rectangleAngulaire2.getCoords(),rectangle2Position );
+        rectangleHorizontal.translate(rectangleHorizontal.getCoords(),rectangleHorizontalPosition );
 
-        // Créer un autre rectangle entre les deux
-        Rectangle centerRectangle = new Rectangle(halfMaxHeight / 2, halfStripeThickness);
-
-        // Positionner le rectangle central entre les deux autres
-        double centerY = (leftRectangle.getMaxY() + rightRectangle.getMaxY()) / 2;
-        double centerX = (leftRectangle.getMaxX() + rightRectangle.getMinX()) / 2;
-        Point2d centerPosition = new Point2d(centerX, centerY);
-        centerRectangle.translate(centerRectangle.getCoords(), centerPosition);
-
-        // Ajouter les rectangles à la lettre B
-        letterA.addAll(leftRectangle.getCoords());
-        letterA.addAll(rightRectangle.getCoords());
-        letterA.addAll(centerRectangle.getCoords());
+        letterA.add(rectangleAngulaire1);
+        letterA.add(rectangleAngulaire2);
+        letterA.add(rectangleHorizontal);
 
         return letterA;
     }
@@ -65,19 +60,15 @@ public final class LetterFactory {
         ellipse1.translate(ellipse1.getCoords(),Ellipse1Position );
         Ellipse2.translate(Ellipse2.getCoords(),Ellipse2Position );
 
-
         Rectangle rectangleVertical = new Rectangle(stripeThickness,maxHeight);
         Point2d rectangleVerticalPosition = new Point2d(( ellipse1.getMinX()),0.0);
         rectangleVertical.translate(rectangleVertical.getCoords(),rectangleVerticalPosition);
-
-
 
         letterB.add(ellipse1);
         letterB.add(Ellipse2);
         letterB.add(rectangleVertical);
 
         return letterB;
-
     }
 
     /** TODO
@@ -87,24 +78,17 @@ public final class LetterFactory {
     public static BaseShape create_C() {
         BaseShape letterD = new BaseShape();
 
-        // Créez une grande ellipse pour la forme principale de la lettre D
-        double largeEllipseDiameter = 100.0; // Ajustez la taille de l'ellipse selon vos besoins
-        Ellipse largeEllipse = new Ellipse(largeEllipseDiameter, largeEllipseDiameter);
+        Ellipse ellipse1 = new Ellipse(maxWidth,maxHeight);
+        Ellipse ellipseVide = new Ellipse(maxWidth/1.5,maxHeight/1.5);
 
-        // Ajoutez la grande ellipse à la lettre D
-        letterD.add(largeEllipse);
+        Rectangle rectangleVertical = new Rectangle(stripeThickness+30,maxHeight/1.5);
+        Point2d rectangleVerticalPosition = new Point2d((ellipse1.getMaxX()-10),0.0);
+        rectangleVertical.translate(rectangleVertical.getCoords(),rectangleVerticalPosition);
 
-        // Créez une petite ellipse pour former le trou dans la lettre D
-        double smallEllipseDiameter = 50.0; // Ajustez la taille de l'ellipse selon vos besoins
-        Ellipse smallEllipse = new Ellipse(smallEllipseDiameter, smallEllipseDiameter);
+        ellipse1.remove(ellipseVide);
+        ellipse1.remove(rectangleVertical);
 
-        // Positionnez la petite ellipse à l'intérieur de la grande ellipse pour former le trou
-        double distanceFromLargeEllipse = 20.0; // Ajustez la distance de la petite ellipse par rapport à la grande ellipse selon vos besoins
-        Point2d smallEllipsePosition = new Point2d(largeEllipseDiameter / 2 - smallEllipseDiameter / 2 - distanceFromLargeEllipse, largeEllipseDiameter / 2 - smallEllipseDiameter / 2);
-        smallEllipse.translate(smallEllipse.getCoords(), smallEllipsePosition);
-
-        // Ajoutez la petite ellipse à la lettre D
-        letterD.add(smallEllipse);
+        letterD.add(ellipse1);
 
         return letterD;
     }
@@ -121,31 +105,28 @@ public final class LetterFactory {
         Rectangle rectangleHorizontal3 = new Rectangle(stripeThickness,maxHeight);
         Rectangle rectangleVertical = new Rectangle(stripeThickness,maxHeight);
 
-
-        // Rotation du rectangle d'un angle de 90 (pour etre horizontal)
         rectangleHorizontal1.rotate(rectangleHorizontal1.getCoords(),1.5707963268);
         rectangleHorizontal2.rotate(rectangleHorizontal2.getCoords(),1.5707963268);
         rectangleHorizontal3.rotate(rectangleHorizontal3.getCoords(),1.5707963268);
 
+        double offset = 5.0;
 
+        Point2d translateur1 = new Point2d(0.0, -maxHeight + 20);
+        rectangleHorizontal1.translate(rectangleHorizontal1.getCoords(), translateur1);
 
-        Point2d translateur2 = new Point2d(0.0,-40.0);
-        rectangleHorizontal2.translate(rectangleHorizontal2.getCoords(),translateur2);
+        Point2d translateur2 = new Point2d(0.0, -halfMaxHeight + offset );
+        rectangleHorizontal2.translate(rectangleHorizontal2.getCoords(), translateur2);
 
-        Point2d translateur3 = new Point2d(0.0,-80.0);
-        rectangleHorizontal3.translate(rectangleHorizontal3.getCoords(),translateur2);
+        Point2d translateur3 = new Point2d(0.0, - offset);
+        rectangleHorizontal3.translate(rectangleHorizontal3.getCoords(), translateur3);
 
-        Point2d translateur4 = new Point2d(-65.0,0.0);
-        rectangleVertical.translate(rectangleVertical.getCoords(),translateur4);
-
-
-
+        Point2d translateurVertical = new Point2d(rectangleHorizontal2.getMinX(), rectangleHorizontal2.getMaxY());
+        rectangleVertical.translate(rectangleVertical.getCoords(), translateurVertical);
 
         letterE.add(rectangleHorizontal1);
         letterE.add(rectangleHorizontal2);
         letterE.add(rectangleHorizontal3);
-
-
+        letterE.add(rectangleVertical);
 
         return letterE;
     }
@@ -156,40 +137,24 @@ public final class LetterFactory {
      */
     public static BaseShape create_H() {
         BaseShape letterH = new BaseShape();
+        Rectangle rectangleVertical1 = new Rectangle(stripeThickness,maxHeight);
+        Rectangle rectangleVertical2 = new Rectangle(stripeThickness,maxHeight);
+        Rectangle rectangleHorizontal = new Rectangle(stripeThickness,halfMaxHeight);
 
-        // Largeur et hauteur des rectangles
-        Double width = 100.0; // Ajustez la largeur selon vos besoins
-        Double height = 150.0; // Ajustez la hauteur selon vos besoins
+        rectangleHorizontal.rotate(rectangleHorizontal.getCoords(),1.5707963268);
 
-        // Créer le rectangle vertical gauche
-        Rectangle leftRectangle = new Rectangle(width / 4, height);
+        Point2d translateur1 = new Point2d(rectangleHorizontal.getMinX(),  0.0);
+        rectangleVertical1.translate(rectangleVertical1.getCoords(), translateur1);
 
-        // Positionner le rectangle vertical gauche
-        Point2d leftRectanglePosition = new Point2d(0.0, 0.0);
-        leftRectangle.translate(leftRectangle.getCoords(), leftRectanglePosition);
+        Point2d translateur2 = new Point2d(rectangleHorizontal.getMaxX(),  0.0 );
+        rectangleVertical2.translate(rectangleVertical2.getCoords(), translateur2);
 
-        // Ajouter le rectangle vertical gauche à la lettre H
-        letterH.add(leftRectangle);
+        Point2d translateur3 = new Point2d(0.0, -(rectangleVertical1.getMaxY()/2)+30.0);
+        rectangleHorizontal.translate(rectangleHorizontal.getCoords(), translateur3);
 
-        // Créer le rectangle horizontal
-        Rectangle centerRectangle = new Rectangle(width / 2, height / 4);
-
-        // Positionner le rectangle horizontal
-        Point2d centerRectanglePosition = new Point2d(width / 4, height / 2);
-        centerRectangle.translate(centerRectangle.getCoords(), centerRectanglePosition);
-
-        // Ajouter le rectangle horizontal à la lettre H
-        letterH.add(centerRectangle);
-
-        // Créer le rectangle vertical droit
-        Rectangle rightRectangle = new Rectangle(width / 4, height);
-
-        // Positionner le rectangle vertical droit
-        Point2d rightRectanglePosition = new Point2d(width / 2, 0.0);
-        rightRectangle.translate(rightRectangle.getCoords(), rightRectanglePosition);
-
-        // Ajouter le rectangle vertical droit à la lettre H
-        letterH.add(rightRectangle);
+        letterH.add(rectangleVertical1);
+        letterH.add(rectangleVertical2);
+        letterH.add(rectangleHorizontal);
 
         return letterH;
     }
@@ -201,13 +166,11 @@ public final class LetterFactory {
     public static BaseShape create_N() {
         BaseShape letterN = new BaseShape();
 
-
         Rectangle rectangleVertical1 = new Rectangle(stripeThickness,maxHeight);
         Rectangle rectangleVertical2 = new Rectangle(stripeThickness,maxHeight);
         Rectangle rectangleAngulaire = new Rectangle(stripeThickness,maxHeight);
-        // Rotation du rectangle d'un angle de 45 degres
-        rectangleAngulaire.rotate(rectangleAngulaire.getCoords(),-0.7853981634);
 
+        rectangleAngulaire.rotate(rectangleAngulaire.getCoords(),-0.7853981634);
 
         Point2d rectangle1Position = new Point2d(( -50.0),0.0);
         rectangleVertical1.translate(rectangleVertical1.getCoords(),rectangle1Position);
@@ -222,7 +185,6 @@ public final class LetterFactory {
         letterN.add(rectangleVertical2);
         letterN.add(rectangleAngulaire);
 
-
         return letterN;
     }
 
@@ -231,21 +193,14 @@ public final class LetterFactory {
      * @return BaseShape containing the letter O
      */
     public static BaseShape create_O() {
-        // Créez une BaseShape pour contenir la lettre
         BaseShape letterO = new BaseShape();
 
-
-        // Créez une ellipse centrée sur (0,0) avec le diamètre spécifié
         Ellipse ellipse = new Ellipse(halfMaxWidth, maxHeight);
 
-
-        // Créez une ellipse vide sur (0,0) avec le diamètre spécifié
         Ellipse ellipseVide = new Ellipse(halfMaxWidth/1.5, maxHeight/1.5);
 
         ellipse.removeAll(ellipseVide.getCoords());
 
-
-        // Ajoutez l'ellipse à la lettre O
         letterO.add(ellipse);
 
         return letterO;

@@ -129,7 +129,7 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Maximum X coordinate of the shape
      */
     public Double getMaxX() {
-        double maxX = -Double.MAX_VALUE; // Initialize with smallest possible value
+        double maxX = -Double.MAX_VALUE;
         for (Point2d point : this.coords) {
             maxX = Math.max(maxX, point.X());
         }
@@ -140,7 +140,7 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Maximum Y coordinate of the shape
      */
     public Double getMaxY() {
-        double maxY = -Double.MAX_VALUE; // Initialize with smallest possible value
+        double maxY = -Double.MAX_VALUE;
         for (Point2d point : this.coords) {
             maxY = Math.max(maxY, point.Y());
         }

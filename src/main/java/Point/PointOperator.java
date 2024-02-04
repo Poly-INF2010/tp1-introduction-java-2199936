@@ -25,7 +25,6 @@ public final class PointOperator {
         int n = vector.length;
         Double[] result = new Double[n];
 
-        // Perform matrix-vector multiplication
         for (int i = 0; i < n; i++) {
             double sum = 0;
             for (int j = 0; j < n; j++) {
@@ -34,7 +33,6 @@ public final class PointOperator {
             result[i] = sum;
         }
 
-        // Update the original vector with the rotated values
         for (int i = 0; i < n; i++) {
             vector[i] = result[i];
         }

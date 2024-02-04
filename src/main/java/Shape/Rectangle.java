@@ -13,8 +13,6 @@ public class Rectangle extends BaseShape {
     public Rectangle(Double width, Double height) {
         double halfWidth = width / 2;
         double halfHeight = height / 2;
-
-        // Iterate over the points within the rectangle and add them to the shape
         for (double x = -halfWidth; x <= halfWidth; x += 0.5) {
             for (double y = -halfHeight; y <= halfHeight; y += 0.5) {
                 this.add(new Point2d(x, y));

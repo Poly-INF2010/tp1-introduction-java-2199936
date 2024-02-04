@@ -16,13 +16,10 @@ public class Ellipse extends BaseShape {
             double semiMajorAxis = widthDiameter / 2;
             double semiMinorAxis = heightDiameter / 2;
 
-            // Iterate over points within the bounding rectangle of the ellipse
             for (double x = -semiMajorAxis; x <= semiMajorAxis; x += 0.5) {
                 for (double y = -semiMinorAxis; y <= semiMinorAxis; y += 0.5) {
-                    // Use the equation of the ellipse to determine if the point is inside
                     double value = (x * x) / (semiMajorAxis * semiMajorAxis) + (y * y) / (semiMinorAxis * semiMinorAxis);
                     if (value <= 1) {
-                        // The point is inside the ellipse, add it to the shape
                         this.add(new Point2d(x, y));
                     }
                 }
@@ -38,7 +35,6 @@ public class Ellipse extends BaseShape {
      */
     public Ellipse(Point2d dimensions) {
         this(dimensions.X() * 2, dimensions.Y() * 2);
-
     }
 
     /**
@@ -47,7 +43,6 @@ public class Ellipse extends BaseShape {
      */
     private Ellipse(Collection<Point2d> coords) {
         this.addAll(coords);
-
     }
 
     /** TODO
@@ -55,15 +50,11 @@ public class Ellipse extends BaseShape {
      */
     @Override
     public Ellipse clone() {
-        // Create a new Ellipse instance
         Ellipse clonedEllipse = new Ellipse(0.0,0.0);
 
-        // Clone all the points from the current Ellipse to the new one
         for (Point2d point : this.getCoords()) {
             clonedEllipse.add(new Point2d(point.X(), point.Y()));
         }
-
         return clonedEllipse;
     }
-
 }
