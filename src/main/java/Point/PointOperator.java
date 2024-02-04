@@ -22,7 +22,22 @@ public final class PointOperator {
      * @param rotationMatrix Matrix by which to rotate
      */
     public static void rotate(Double[] vector, Double[][] rotationMatrix) {
+        int n = vector.length;
+        Double[] result = new Double[n];
 
+        // Perform matrix-vector multiplication
+        for (int i = 0; i < n; i++) {
+            double sum = 0;
+            for (int j = 0; j < n; j++) {
+                sum += rotationMatrix[i][j] * vector[j];
+            }
+            result[i] = sum;
+        }
+
+        // Update the original vector with the rotated values
+        for (int i = 0; i < n; i++) {
+            vector[i] = result[i];
+        }
 
     }
 
@@ -32,6 +47,9 @@ public final class PointOperator {
      * @param divider Scalar by which to divide
      */
     public static void divide(Double[] vector, Double divider) {
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] /= divider;
+        }
 
     }
 
@@ -41,6 +59,9 @@ public final class PointOperator {
      * @param multiplier Scalar by which to multiply
      */
     public static void multiply(Double[] vector, Double multiplier) {
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] *= multiplier;
+        }
 
     }
 
@@ -50,6 +71,9 @@ public final class PointOperator {
      * @param adder Scalar to add to vector
      */
     public static void add(Double[] vector, Double adder) {
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] += adder;
+        }
 
     }
 }

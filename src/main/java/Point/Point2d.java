@@ -21,6 +21,7 @@ public class Point2d extends AbstractPoint {
         this(vector[0], vector[1]);
     }
 
+
     /**
      * @return X coordinate
      */
@@ -31,6 +32,9 @@ public class Point2d extends AbstractPoint {
      */
     public double Y() { return this.vector[1];}
 
+
+
+
     /** TODO
      * Translate the point by the given vector
      * @param translateVector The vector by which to translate
@@ -38,9 +42,9 @@ public class Point2d extends AbstractPoint {
      */
     @Override
     public Point2d translate(Double[] translateVector) {
-        double x = this.X() + translateVector[0];
-        double y = this.Y() + translateVector[1];
-        return new Point2d(x, y);
+        this.vector[0] += translateVector[1];
+        this.vector[1] += translateVector[0];
+        return this;
     }
 
     /** TODO
@@ -49,11 +53,13 @@ public class Point2d extends AbstractPoint {
      * @return Translated point
      */
     public Point2d translate(Point2d translateVector) {
-        double newX = this.X() + translateVector.X();
-        double newY = this.Y() + translateVector.Y();
-
-        return new Point2d(newX, newY);
+        this.vector[0] += translateVector.X();
+        this.vector[1] += translateVector.Y();
+        return this;
     }
+
+
+
 
     /** TODO
      * Rotate the point by the given rotation Matrix
@@ -68,7 +74,10 @@ public class Point2d extends AbstractPoint {
         double newX = rotationMatrix[0][0] * x + rotationMatrix[0][1] * y;
         double newY = rotationMatrix[1][0] * x + rotationMatrix[1][1] * y;
 
-        return new Point2d(newX, newY);
+        this.vector[0] = newX;
+        this.vector[1] = newY;
+
+        return this;
     }
 
     /** TODO
@@ -76,16 +85,17 @@ public class Point2d extends AbstractPoint {
      * @param angle Angle in radians
      * @return Rotated point
      */
-    public Point2d rotate(Double angle) {
-
+    public Point2d rotate(double angle) {
         double currentX = this.X();
         double currentY = this.Y();
 
         double newX = currentX * Math.cos(angle) - currentY * Math.sin(angle);
         double newY = currentX * Math.sin(angle) + currentY * Math.cos(angle);
 
-        return new Point2d(newX, newY);
+        this.vector[0] = newX;
+        this.vector[1] = newY;
 
+        return this;
     }
 
     /** TODO
@@ -102,7 +112,10 @@ public class Point2d extends AbstractPoint {
         double newX = x / divider;
         double newY = y / divider;
 
-        return new Point2d(newX, newY);
+        this.vector[0] = newX;
+        this.vector[1] = newY;
+
+        return this;
     }
 
     /** TODO
@@ -119,7 +132,10 @@ public class Point2d extends AbstractPoint {
         double newX = x * multiplier;
         double newY = y * multiplier;
 
-        return new Point2d(newX, newY);
+        this.vector[0] = newX;
+        this.vector[1] = newY;
+
+        return this;
     }
 
     /** TODO
@@ -136,8 +152,10 @@ public class Point2d extends AbstractPoint {
         double newX = x + adder;
         double newY = y + adder;
 
+        this.vector[0] = newX;
+        this.vector[1] = newY;
 
-        return new Point2d(newX, newY);
+        return this;
     }
 
     /** TODO
