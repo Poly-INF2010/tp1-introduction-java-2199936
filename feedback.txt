@@ -1,0 +1,8 @@
+Points	3/5
+Formes	4/5
+Lettres	4/5
+Qualité de code et Design	4/5
+Total	15/20
+
+les methodes statiques de PointOperator doivent être appelées dans Point2D
+Les méthodes comme add(BaseShape) doivent utiliser addAll ( duplication de code)
